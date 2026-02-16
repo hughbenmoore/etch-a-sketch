@@ -28,10 +28,31 @@ function createGrid(size) {
 		square.style.width = `${squareSize}px`;
 		square.style.height = `${squareSize}px`;
 
-		// Hover Effect
+		// Square Count For Black
+		square.dataset.darkness = 0;
+
 		square.addEventListener("mouseover", () => {
-			square.style.backgroundColor = "black";
+			let darkness = Number(square.dataset.darkness);
+
+			if (darkness < 10) {
+
+				if (darkness === 0) {
+					square.dataset.r = Math.floor(Math.random() * 256);
+					square.dataset.g = Math.floor(Math.random() * 256);
+					square.dataset.b = Math.floor(Math.random() * 256);
+				}
+
+				darkness ++;
+				square.dataset.darkness = darkness
+
+				const r = square.dataset.r
+				const g = square.dataset.g 
+				const b = square.dataset.b
+
+				square.style.backgroundColor = `rgba(${r}, ${g}, ${b}, ${1 - darkness * 0.1})`;
+			};
 		});
+
 	container.appendChild(square);
 	};
 };
